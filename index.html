@@ -1,0 +1,831 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>물리화학실험 2조 · 제출 가이드</title>
+<style>
+  :root{
+    --ink:#1f2a24;
+    --paper:#ffffff;
+    --line:#dcdcdc;
+    --accent:#2f6f4f;
+    --accent-soft:#e8f0ea;
+    --muted:#6b6b6b;
+    --warn:#8a5a1f;
+    --warn-bg:#fbf0de;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    padding:40px 20px 80px;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",sans-serif;
+    line-height:1.6;
+  }
+  .sheet{
+    max-width:640px;
+    margin:0 auto;
+  }
+  h1{
+    font-size:1.5rem;
+    font-weight:700;
+    margin:0 0 4px;
+    letter-spacing:-0.01em;
+  }
+  .sub{
+    color:var(--muted);
+    font-size:0.9rem;
+    margin:0 0 28px;
+  }
+  .email-block{
+    background:var(--accent-soft);
+    border:1px solid #cfe0d5;
+    border-radius:10px;
+    padding:16px 20px;
+    margin-bottom:32px;
+  }
+  .email-block .label{
+    font-size:0.8rem;
+    color:var(--accent);
+    font-weight:600;
+    margin-bottom:4px;
+  }
+  .email-block .value{
+    font-size:1.05rem;
+    font-weight:600;
+    word-break:break-all;
+    cursor:pointer;
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    transition:opacity 0.15s ease;
+  }
+  .email-block .value:hover{
+    opacity:0.75;
+  }
+  .email-block .value::after{
+    content:"copy";
+    font-size:0.7rem;
+    font-weight:600;
+    color:var(--accent);
+    border:1px solid #cfe0d5;
+    border-radius:4px;
+    padding:1px 6px;
+  }
+
+  .copy-email{
+    cursor:pointer;
+    border-bottom:1px dashed currentColor;
+    transition:opacity 0.15s ease;
+  }
+  .copy-email:hover{
+    opacity:0.7;
+  }
+
+  #toast{
+    position:fixed;
+    left:50%;
+    bottom:36px;
+    transform:translateX(-50%);
+    background:#222;
+    color:#fff;
+    font-size:0.85rem;
+    font-weight:600;
+    padding:10px 18px;
+    border-radius:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.18);
+    opacity:0;
+    pointer-events:none;
+    z-index:999;
+    transition:opacity 0.25s ease;
+  }
+  #toast.show{
+    opacity:1;
+    transition:opacity 0.15s ease;
+  }
+  details{
+    border:1px solid var(--line);
+    border-radius:10px;
+    margin-bottom:12px;
+    background:#fff;
+    overflow:hidden;
+  }
+  details > summary{
+    list-style:none;
+    cursor:pointer;
+    padding:14px 18px;
+    font-weight:600;
+    font-size:1rem;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    background:#fff;
+    transition:background 0.15s ease;
+  }
+  details > summary::-webkit-details-marker{ display:none; }
+  details > summary::after{
+    content:"›";
+    display:inline-block;
+    font-size:1.3rem;
+    color:var(--muted);
+    transform:rotate(90deg);
+    transition:transform 0.18s ease;
+    line-height:1;
+  }
+  details[open] > summary::after{
+    transform:rotate(-90deg);
+  }
+  details > summary:hover{
+    background:#f4f4f4;
+  }
+  details[open] > summary{
+    border-bottom:1px solid var(--line);
+  }
+  .content{
+    padding:16px 20px 20px;
+    font-size:0.92rem;
+  }
+  .content p{ margin:0 0 10px; }
+  .content ul{ margin:0 0 10px; padding-left:20px; }
+  .content li{ margin-bottom:4px; }
+
+  /* 실험별 카드 */
+  .exp{
+    border:1px solid var(--line);
+    border-radius:8px;
+    margin-bottom:10px;
+    background:#fbfbfb;
+  }
+  .exp > summary{
+    padding:11px 16px;
+    font-weight:600;
+    font-size:0.93rem;
+    cursor:pointer;
+    list-style:none;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+  }
+  .exp > summary::-webkit-details-marker{ display:none; }
+  .exp > summary::after{
+    content:"›";
+    color:var(--muted);
+    transform:rotate(90deg);
+    transition:transform 0.18s ease;
+  }
+  .exp[open] > summary::after{ transform:rotate(-90deg); }
+  .exp[open] > summary{ border-bottom:1px solid var(--line); }
+  .exp .content{ padding:14px 16px 16px; }
+
+  .deadline-row{
+    display:flex;
+    gap:16px;
+    margin-bottom:12px;
+    flex-wrap:wrap;
+  }
+  .deadline{
+    background:var(--accent-soft);
+    color:var(--accent);
+    border-radius:6px;
+    padding:6px 10px;
+    font-size:0.82rem;
+    font-weight:600;
+  }
+  table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:0.88rem;
+    margin-bottom:10px;
+  }
+  th, td{
+    text-align:left;
+    padding:6px 8px;
+    border-bottom:1px solid var(--line);
+  }
+  th{
+    color:var(--muted);
+    font-weight:600;
+    width:56px;
+  }
+  .contact{
+    font-size:0.85rem;
+    color:var(--muted);
+  }
+  .contact b{ color:var(--ink); }
+
+  .exp tr.lead th,
+  .exp tr.lead td{
+    color:var(--accent);
+    font-weight:700;
+  }
+
+  .warn{
+    background:var(--warn-bg);
+    border-left:3px solid var(--warn);
+    padding:8px 12px;
+    border-radius:0 6px 6px 0;
+    font-size:0.85rem;
+    color:#6b4a15;
+    margin-bottom:10px;
+  }
+  .arrow-note{
+    color:var(--accent);
+    font-weight:600;
+  }
+
+  /* 상단 레이아웃: 이메일 + 캘린더 */
+  .top-row{
+    display:flex;
+    align-items:flex-start;
+    justify-content:space-between;
+    gap:16px;
+    flex-wrap:wrap;
+    margin-bottom:32px;
+  }
+  .top-row .email-block{
+    flex:1 1 220px;
+    margin-bottom:0;
+  }
+
+  /* 캘린더 위젯 */
+  .cal-widget{
+    flex:0 0 260px;
+    width:260px;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:12px 12px 14px;
+    background:#fbfbfb;
+  }
+  .cal-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:8px;
+  }
+  .cal-head .cal-month{
+    font-size:0.85rem;
+    font-weight:700;
+  }
+  .cal-nav{
+    width:22px;
+    height:22px;
+    border:1px solid var(--line);
+    border-radius:6px;
+    background:#fff;
+    color:var(--ink);
+    font-size:0.85rem;
+    line-height:1;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+  }
+  .cal-nav:hover{ background:#f0f0f0; }
+  .cal-nav[disabled]{
+    opacity:0.3;
+    cursor:default;
+    pointer-events:none;
+  }
+  .cal-weekdays{
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    font-size:0.65rem;
+    color:var(--muted);
+    text-align:center;
+    margin-bottom:2px;
+  }
+  .cal-grid{
+    display:flex;
+    flex-direction:column;
+    gap:2px;
+  }
+  .cal-week{
+    position:relative;
+    display:grid;
+    grid-template-columns:repeat(7,1fr);
+    height:46px;
+  }
+  .cal-cell{
+    position:relative;
+    z-index:2;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    padding-top:2px;
+    font-size:0.68rem;
+    color:var(--ink);
+  }
+  .cal-cell.dim .daynum{ color:#cfcfcf; }
+  .cal-cell .daynum{
+    width:16px;
+    height:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    line-height:1;
+  }
+  .cal-cell.today .daynum{
+    background:#555555;
+    color:#fff;
+    font-weight:700;
+  }
+  .cal-star{
+    font-size:0.62rem;
+    line-height:1;
+    height:10px;
+    margin-bottom:2px;
+    cursor:default;
+  }
+  .week-bar{
+    position:absolute;
+    height:6px;
+    border-radius:4px;
+    z-index:1;
+    cursor:default;
+  }
+  #calTooltip{
+    position:fixed;
+    background:#222;
+    color:#fff;
+    font-size:0.72rem;
+    font-weight:600;
+    padding:5px 10px;
+    border-radius:6px;
+    pointer-events:none;
+    z-index:1000;
+    opacity:0;
+    white-space:nowrap;
+    transform:translate(-50%,-135%);
+    transition:opacity 0.12s ease;
+    box-shadow:0 6px 16px rgba(0,0,0,0.2);
+  }
+  #calTooltip.show{ opacity:1; }
+  .cal-legend{
+    margin-top:10px;
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+  }
+  .cal-legend-note{
+    font-size:0.62rem;
+    color:var(--muted);
+    line-height:1.5;
+    padding-bottom:4px;
+    border-bottom:1px dashed var(--line);
+    margin-bottom:2px;
+  }
+  .cal-legend-note b{ color:var(--ink); }
+  .cal-legend-row{
+    display:flex;
+    align-items:center;
+    gap:6px;
+    font-size:0.66rem;
+    color:var(--muted);
+  }
+  .cal-swatch{
+    display:flex;
+    flex-shrink:0;
+    width:16px;
+    height:8px;
+    border-radius:2px;
+    overflow:hidden;
+  }
+  .cal-swatch span{ flex:1; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="top-row">
+    <div class="email-block">
+      <div class="label">📧 조교님 이메일</div>
+      <div class="value" onclick="copyEmail('jaehwang0329@gmail.com')">jaehwang0329@gmail.com</div>
+    </div>
+
+    <div class="cal-widget">
+      <div class="cal-head">
+        <button class="cal-nav" id="calPrev" onclick="shiftMonth(-1)">‹</button>
+        <span class="cal-month" id="calMonthLabel"></span>
+        <button class="cal-nav" id="calNext" onclick="shiftMonth(1)">›</button>
+      </div>
+      <div class="cal-weekdays">
+        <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-legend" id="calLegend"></div>
+    </div>
+  </div>
+
+  <!-- 1. 이메일 제목 양식 -->
+  <details>
+    <summary>📧 이메일 제목 양식</summary>
+    <div class="content">
+      <p><b>① 조교님께 제출할 때</b></p>
+      <ul>
+        <li>물화실_2조_(실험명)_예비보고서</li>
+        <li>물화실_2조_(실험명)_결과보고서및발표자료</li>
+      </ul>
+      <p><b>② 취합 담당자에게 전달할 때</b></p>
+      <ul>
+        <li>물화실_2조_(실험명)_예비보고서_(번호)</li>
+        <li>물화실_2조_(실험명)_결과보고서_(번호)</li>
+        <li>물화실_2조_(실험명)_발표자료_(번호)</li>
+      </ul>
+      <p class="contact">* (번호)는 본인 담당 번호</p>
+    </div>
+  </details>
+
+  <!-- 2. 기본 제출 및 공유 규칙 -->
+  <details>
+    <summary>📢 기본 제출 및 공유 규칙</summary>
+    <div class="content">
+      <p><b>① 보고서 (예비/결과)</b></p>
+      <p>각자 담당 파트 작성 후 <b>화요일</b>까지 취합 담당(1번)에게 전달 → 취합 담당은 <b>수요일</b> 조교님께 제출 및 단톡방 공유</p>
+
+      <p><b>② PPT</b></p>
+      <p>각자 담당 파트의 슬라이드 내용을 정리하여 <b>일요일</b>까지 PPT 담당에게 전달 → PPT 담당은 전체 취합 후 <b>화요일</b> 조교님께 제출 및 단톡방 공유 → <b>수요일</b> 발표 준비</p>
+
+      <div class="warn">모든 결과물(예비보고서·결과보고서·PPT)은 조교님 제출과 동시에 단톡방에도 반드시 업로드</div>
+      <div class="warn">취합 담당자에게 전달할 때는 참고 문헌 및 이미지 출처를 APA 양식으로 함께 첨부 (본문 마지막에 [참고문헌] 기재)</div>
+      <div class="warn">제출 기한은 해당 날짜의 23:59까지 기준 (예: 9/17까지 → 9/17 23:59까지)</div>
+      <div class="warn">담당 파트 분량은 아래 기준을 참고하되, 내용이 부족하지 않도록 충분히 작성</div>
+    </div>
+  </details>
+
+  <!-- 3. 보고서 작성 분담 -->
+  <details>
+    <summary>📑 보고서 작성 분담</summary>
+    <div class="content">
+      <p><b>① 예비보고서</b></p>
+      <table>
+        <tr><th>1번</th><td>배경 및 목적 (약 1장)</td></tr>
+        <tr><th>2번</th><td>실험 이론 (약 1장)</td></tr>
+        <tr><th>3번</th><td>실험 방법 + 주의사항 (각 약 1장, 총 2장)</td></tr>
+        <tr><th>4번</th><td>예상 결과 (약 1장)</td></tr>
+      </table>
+
+      <p><b>② 결과보고서</b></p>
+      <table>
+        <tr><th>1번</th><td>실제 실험 방법 (약 2장)</td></tr>
+        <tr><th>2번</th><td>실험 결과 및 결론 (약 2~3장)</td></tr>
+        <tr><th>3번</th><td>토의 (약 2장)</td></tr>
+        <tr><th>4번</th><td>고찰 (약 2장)</td></tr>
+      </table>
+
+      <p class="contact">각자 참고한 문헌/이미지의 APA 출처는 담당자에게 함께 전달</p>
+    </div>
+  </details>
+
+  <!-- 4. PPT 작성 준비 -->
+  <details>
+    <summary>🖥️ PPT 작성 준비</summary>
+    <div class="content">
+      <ul>
+        <li>표지 제외 약 10장</li>
+        <li>각자 담당 파트의 슬라이드 내용을 정리하여 <b>일요일</b>까지 PPT 담당자에게 전달</li>
+        <li>PPT 담당자는 전체 취합 후 <b>화요일</b> 조교님께 제출 및 단톡방 공유</li>
+        <li>발표용 PPT 출력 (한 장에 2페이지, 단면 인쇄)</li>
+        <li><b>수요일</b> 발표 준비</li>
+      </ul>
+    </div>
+  </details>
+
+  <!-- 5. 실험별 담당자 -->
+  <details>
+    <summary>🧪 실험별 담당자</summary>
+    <div class="content">
+
+      <details class="exp">
+        <summary>1️⃣ 실험 1 — Viscosity</summary>
+        <div class="content">
+          <div class="deadline-row">
+            <span class="deadline">📅 예비보고서 메일발송 9/16(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 9/30(수)</span>
+          </div>
+          <table>
+            <tr class="lead"><th>1번</th><td>고효은</td></tr>
+            <tr><th>2번</th><td>이용욱</td></tr>
+            <tr><th>3번</th><td>우수민</td></tr>
+            <tr><th>4번</th><td>박재현</td></tr>
+          </table>
+          <p class="contact">📨 취합 담당(1번) · PPT 담당: <b class="copy-email" onclick="copyEmail('hyo3un@naver.com')">hyo3un@naver.com</b></p>
+        </div>
+      </details>
+
+      <details class="exp">
+        <summary>2️⃣ 실험 2 — Activation Energy</summary>
+        <div class="content">
+          <div class="deadline-row">
+            <span class="deadline">📅 예비보고서 메일발송 10/7(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 10/14(수)</span>
+          </div>
+          <table>
+            <tr class="lead"><th>1번</th><td>박재현</td></tr>
+            <tr><th>2번</th><td>고효은</td></tr>
+            <tr><th>3번</th><td>이용욱</td></tr>
+            <tr><th>4번</th><td>우수민</td></tr>
+          </table>
+          <p class="contact">📨 취합 담당(1번): <b class="copy-email" onclick="copyEmail('ptre5932@gmail.com')">ptre5932@gmail.com</b><br>📨 PPT 담당: <b class="copy-email" onclick="copyEmail('hyo3un@naver.com')">hyo3un@naver.com</b></p>
+        </div>
+      </details>
+
+      <details class="exp">
+        <summary>3️⃣ 실험 3 — UV-Vis Absorption Spectroscopy</summary>
+        <div class="content">
+          <div class="deadline-row">
+            <span class="deadline">📅 예비보고서 메일발송 10/21(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 10/28(수)</span>
+          </div>
+          <table>
+            <tr class="lead"><th>1번</th><td>우수민</td></tr>
+            <tr><th>2번</th><td>박재현</td></tr>
+            <tr><th>3번</th><td>고효은</td></tr>
+            <tr><th>4번</th><td>이용욱</td></tr>
+          </table>
+          <p class="contact">📨 취합 담당(1번): <b class="copy-email" onclick="copyEmail('c4ff3iin3@gmail.com')">c4ff3iin3@gmail.com</b><br>📨 PPT 담당: <b class="copy-email" onclick="copyEmail('hyo3un@naver.com')">hyo3un@naver.com</b></p>
+        </div>
+      </details>
+
+      <details class="exp">
+        <summary>4️⃣ 실험 4 — Gas Chromatography</summary>
+        <div class="content">
+          <div class="deadline-row">
+            <span class="deadline">📅 예비보고서 메일발송 11/4(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 11/11(수)</span>
+          </div>
+          <table>
+            <tr class="lead"><th>1번</th><td>이용욱</td></tr>
+            <tr><th>2번</th><td>우수민</td></tr>
+            <tr><th>3번</th><td>박재현</td></tr>
+            <tr><th>4번</th><td>고효은</td></tr>
+          </table>
+          <p class="contact">📨 취합 담당(1번): <b class="copy-email" onclick="copyEmail('ywook03@naver.com')">ywook03@naver.com</b><br>📨 PPT 담당: <b class="copy-email" onclick="copyEmail('hyo3un@naver.com')">hyo3un@naver.com</b></p>
+        </div>
+      </details>
+
+    </div>
+  </details>
+
+  <!-- 6. 정리 -->
+  <details>
+    <summary>📌 정리</summary>
+    <div class="content">
+      <p><b>① 예비보고서</b><br>
+      : 개인 작성 ➔ 화요일까지 취합 담당에게 전달<br>
+      ➔ 수요일 조교님 제출 + 단톡방 공유</p>
+
+      <p><b>② 결과보고서</b><br>
+      : 개인 작성 ➔ 화요일까지 취합 담당에게 전달<br>
+      ➔ 수요일 조교님 제출 + 단톡방 공유</p>
+
+      <p><b>③ PPT</b><br>
+      : 개인 담당 파트 정리 ➔ 일요일까지 PPT 담당에게 전달<br>
+      ➔ 화요일 조교님 제출 + 단톡방 공유<br>
+      ➔ 수요일 발표</p>
+    </div>
+  </details>
+
+</div>
+
+<div id="toast">클립보드에 복사되었습니다.</div>
+<div id="calTooltip"></div>
+
+<script>
+  let toastTimer = null;
+  function copyEmail(email){
+    const done = () => showToast();
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(email).then(done).catch(() => fallbackCopy(email, done));
+    } else {
+      fallbackCopy(email, done);
+    }
+  }
+  function fallbackCopy(text, cb){
+    const ta = document.createElement('textarea');
+    ta.value = text;
+    ta.style.position = 'fixed';
+    ta.style.opacity = '0';
+    document.body.appendChild(ta);
+    ta.select();
+    try{ document.execCommand('copy'); }catch(e){}
+    document.body.removeChild(ta);
+    cb();
+  }
+  function showToast(){
+    const toast = document.getElementById('toast');
+    clearTimeout(toastTimer);
+    toast.classList.add('show');
+    toastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 1500);
+  }
+
+  /* ---------- 캘린더 ---------- */
+  // 실험 시행일(C)과 발표일(P)을 기준으로 계산합니다.
+  // [진한색, 1번 레인] 예비보고서 작성: C-7~C-2(화) → 화요일까지 취합담당에게 전달
+  //                    메일 발송(★ 진한색): C-1(수)
+  //                    결과보고서 작성: C~P-2(화) → 화요일까지 취합담당에게 전달
+  //                    메일 발송(★ 진한색): P-1(수)
+  // [연한색, 2번 레인] PPT 자료 정리: C~C+3(일) → 일요일까지 PPT담당에게 전달 (결과보고서 작성기간과 겹치는 구간에만 존재)
+  //                    조교님 제출(★ 연한색): P-2(화)
+  // 실험 당일(C)·발표 당일(P) 자체는 별도 표시하지 않습니다.
+  const expGroups = [
+    { name:'Viscosity',         experiment:[2026,9,17],  present:[2026,10,1],  light:'#8fd9b6', dark:'#2f6f4f' },
+    { name:'Activation Energy', experiment:[2026,10,8],  present:[2026,10,15], light:'#a9c9f2', dark:'#3b6ea5' },
+    { name:'UV-Vis',            experiment:[2026,10,22], present:[2026,10,29], light:'#ddc0f5', dark:'#7b4fa0' },
+    { name:'GC',                experiment:[2026,11,5],  present:[2026,11,12], light:'#f8d5a0', dark:'#c97a2e' },
+  ];
+
+  function mkDate(y,m,d){ return new Date(y, m-1, d); } // m: 1~12 입력받아 내부적으로 0-based 변환
+  function addDays(date, n){ const d = new Date(date); d.setDate(d.getDate() + n); return d; }
+
+  const minMonth = mkDate(2026,9,1);
+  const maxMonth = mkDate(2026,11,1);
+
+  const realToday = new Date();
+  realToday.setHours(0,0,0,0);
+
+  let current = new Date(realToday.getFullYear(), realToday.getMonth(), 1);
+  if(current < minMonth) current = new Date(minMonth);
+  if(current > maxMonth) current = new Date(maxMonth);
+
+  function sameDate(a,b){
+    return a.getFullYear()===b.getFullYear() && a.getMonth()===b.getMonth() && a.getDate()===b.getDate();
+  }
+
+  function buildSegments(){
+    const bars = [];
+    const stars = [];
+    expGroups.forEach(g => {
+      const C = mkDate(g.experiment[0], g.experiment[1], g.experiment[2]);
+      const P = mkDate(g.present[0], g.present[1], g.present[2]);
+
+      // 예비보고서: 조사자료 정리 → 화요일까지 취합담당 전달
+      bars.push({ lane:1, start:addDays(C,-7), end:addDays(C,-2), color:g.dark, label:`${g.name} 예비보고서 조사자료 정리 (~화 취합담당 전달)` });
+      stars.push({ date:addDays(C,-1), color:g.dark, label:'예비보고서 제출일' });
+
+      // 결과보고서: 조사자료 정리 → 화요일까지 취합담당 전달
+      bars.push({ lane:1, start:C, end:addDays(P,-2), color:g.dark, label:`${g.name} 결과보고서 조사자료 정리 (~화 취합담당 전달)` });
+      // PPT: 결과보고서 작성기간과 겹치는 목~일 구간, 일요일까지 PPT담당 전달
+      bars.push({ lane:2, start:C, end:addDays(C,3), color:g.light, label:`${g.name} PPT 자료 정리 (~일 PPT담당 전달)` });
+      // PPT 조교님 제출(★, 연한색): 화요일
+      stars.push({ date:addDays(P,-2), color:g.light, label:'PPT 제출일' });
+      stars.push({ date:addDays(P,-1), color:g.dark, label:'결과보고서 제출일' });
+    });
+    return { bars, stars };
+  }
+  const { bars: allBars, stars: allStars } = buildSegments();
+
+  function starAt(date){
+    return allStars.find(s => sameDate(s.date, date)) || null;
+  }
+
+  /* ---------- 별표 툴팁(간단 텍스트만) ---------- */
+  const tooltipEl = document.getElementById('calTooltip');
+  function showTooltip(e, text){
+    tooltipEl.textContent = text;
+    tooltipEl.style.left = e.clientX + 'px';
+    tooltipEl.style.top = e.clientY + 'px';
+    tooltipEl.classList.add('show');
+  }
+  function moveTooltip(e){
+    tooltipEl.style.left = e.clientX + 'px';
+    tooltipEl.style.top = e.clientY + 'px';
+  }
+  function hideTooltip(){
+    tooltipEl.classList.remove('show');
+  }
+  function bindStarTooltip(el, text){
+    el.addEventListener('mouseenter', e => showTooltip(e, text));
+    el.addEventListener('mousemove', moveTooltip);
+    el.addEventListener('mouseleave', hideTooltip);
+  }
+
+  function renderLegend(){
+    const legend = document.getElementById('calLegend');
+    legend.innerHTML = '';
+
+    const note = document.createElement('div');
+    note.className = 'cal-legend-note';
+    note.innerHTML = '<b>─</b> 보고서 작성 &nbsp; <b>─</b> PPT 자료 정리 &nbsp; <b>★</b> 조교님께 메일 발송';
+    legend.appendChild(note);
+
+    expGroups.forEach(g => {
+      const row = document.createElement('div');
+      row.className = 'cal-legend-row';
+      row.innerHTML = `<span class="cal-swatch"><span style="background:${g.dark}"></span><span style="background:${g.light}"></span></span>${g.name}`;
+      legend.appendChild(row);
+    });
+  }
+
+  function renderCalendar(){
+    const y = current.getFullYear(), m = current.getMonth();
+    document.getElementById('calMonthLabel').textContent = `${y}년 ${m+1}월`;
+    document.getElementById('calPrev').disabled = (current <= minMonth);
+    document.getElementById('calNext').disabled = (current >= maxMonth);
+
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    const firstDay = new Date(y, m, 1).getDay();
+    const daysInMonth = new Date(y, m+1, 0).getDate();
+    const totalCells = Math.ceil((firstDay + daysInMonth) / 7) * 7;
+    const totalWeeks = totalCells / 7;
+
+    // 날짜 -> {row, col} 매핑 (이번 달 날짜만)
+    const posMap = {};
+    for(let d=1; d<=daysInMonth; d++){
+      const idx = firstDay + d - 1;
+      posMap[d] = { row: Math.floor(idx/7), col: idx%7 };
+    }
+
+    // 주(week) 단위 행 컨테이너 생성
+    const weekEls = [];
+    for(let w=0; w<totalWeeks; w++){
+      const week = document.createElement('div');
+      week.className = 'cal-week';
+      grid.appendChild(week);
+      weekEls.push(week);
+    }
+
+    // 날짜 셀 채우기
+    for(let i=0; i<totalCells; i++){
+      const dayNum = i - firstDay + 1;
+      const w = Math.floor(i/7);
+      const cell = document.createElement('div');
+      cell.className = 'cal-cell';
+
+      const starSlot = document.createElement('span');
+      starSlot.className = 'cal-star';
+
+      const numEl = document.createElement('span');
+      numEl.className = 'daynum';
+
+      if(dayNum < 1 || dayNum > daysInMonth){
+        cell.classList.add('dim');
+        numEl.textContent = '';
+        cell.appendChild(starSlot);
+        cell.appendChild(numEl);
+      } else {
+        const date = new Date(y, m, dayNum);
+        numEl.textContent = dayNum;
+        if(sameDate(date, realToday)) cell.classList.add('today');
+
+        const star = starAt(date);
+        if(star){
+          starSlot.textContent = '★';
+          starSlot.style.color = star.color;
+          bindStarTooltip(starSlot, star.label);
+        }
+        cell.appendChild(starSlot);
+        cell.appendChild(numEl);
+      }
+      weekEls[w].appendChild(cell);
+    }
+
+    // 작성기간을 주(week) 단위로 끊어서 레인별로 연속된 막대로 표시
+    allBars.forEach(seg => {
+      let d = new Date(seg.start);
+      while(d <= seg.end){
+        if(d.getFullYear() === y && d.getMonth() === m){
+          const pos = posMap[d.getDate()];
+          let endOfChunk = new Date(d);
+          while(true){
+            const next = addDays(endOfChunk, 1);
+            if(next > seg.end) break;
+            if(next.getFullYear() !== y || next.getMonth() !== m) break;
+            const nextPos = posMap[next.getDate()];
+            if(nextPos.row !== pos.row) break;
+            endOfChunk = next;
+          }
+          const endPos = posMap[endOfChunk.getDate()];
+          const bar = document.createElement('div');
+          bar.className = 'week-bar';
+          bar.style.top = (seg.lane === 2 ? '39px' : '31px');
+          bar.style.left = `calc(${(pos.col/7*100)}% + 3px)`;
+          bar.style.width = `calc(${((endPos.col - pos.col + 1)/7*100)}% - 6px)`;
+          bar.style.background = seg.color;
+          weekEls[pos.row].appendChild(bar);
+          d = addDays(endOfChunk, 1);
+          continue;
+        }
+        d = addDays(d, 1);
+      }
+    });
+  }
+
+  function shiftMonth(delta){
+    const next = new Date(current.getFullYear(), current.getMonth()+delta, 1);
+    if(next < minMonth || next > maxMonth) return;
+    current = next;
+    renderCalendar();
+  }
+
+  renderLegend();
+  renderCalendar();
+</script>
+</body>
+</html>
