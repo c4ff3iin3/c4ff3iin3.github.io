@@ -339,6 +339,15 @@
     margin-bottom:2px;
     cursor:default;
   }
+  .cal-tag{
+    position:absolute;
+    top:3px;
+    right:3px;
+    width:6px;
+    height:6px;
+    border-radius:50%;
+    cursor:default;
+  }
   .week-bar{
     position:absolute;
     height:6px;
@@ -426,8 +435,7 @@
       <p><b>① 조교님께 제출할 때</b></p>
       <ul>
         <li>물화실_2조_(실험명)_예비보고서</li>
-        <li>물화실_2조_(실험명)_결과보고서</li>
-        <li>물화실_2조_(실험명)_발표자료</li>
+        <li>물화실_2조_(실험명)_결과보고서및발표자료</li>
       </ul>
       <p><b>② 취합 담당자에게 전달할 때</b></p>
       <ul>
@@ -444,12 +452,12 @@
     <summary>📢 기본 제출 및 공유 규칙</summary>
     <div class="content">
       <p><b>① 보고서 (예비/결과)</b></p>
-      <p>: 각자 담당 파트 작성 후 <b>화요일</b>까지 취합 담당(1번)에게 전달 → 취합 담당은 <b>수요일</b> 조교님께 제출 및 단톡방 공유</p>
+      <p>각자 담당 파트 작성 후 <b>화요일</b>까지 취합 담당(1번)에게 전달 → 취합 담당은 <b>수요일</b> 조교님께 제출 및 단톡방 공유</p>
 
       <p><b>② PPT</b></p>
-      <p>: 각자 담당 파트의 슬라이드 내용을 정리하여 <b>일요일</b>까지 PPT 담당에게 전달 → PPT 담당은 전체 취합 후 <b>화요일</b> 조교님께 제출 및 단톡방 공유 → <b>수요일</b> 발표 준비</p>
+      <p>각자 담당 파트의 슬라이드 내용을 정리하여 <b>일요일</b>까지 PPT 담당에게 전달 → PPT 담당은 전체 취합 후 <b>화요일</b> 조교님께 제출 및 단톡방 공유 → <b>수요일</b> 발표 준비</p>
 
-      <div class="warn">모든 결과물(예비보고서/결과보고서/PPT)은 조교님 제출과 동시에 단톡방에도 반드시 업로드</div>
+      <div class="warn">모든 결과물(예비보고서·결과보고서·PPT)은 조교님 제출과 동시에 단톡방에도 반드시 업로드</div>
       <div class="warn">취합 담당자에게 전달할 때는 참고 문헌 및 이미지 출처를 APA 양식으로 함께 첨부 (본문 마지막에 [참고문헌] 기재)</div>
       <div class="warn">제출 기한은 해당 날짜의 23:59까지 기준 (예: 9/17까지 → 9/17 23:59까지)</div>
       <div class="warn">담당 파트 분량은 아래 기준을 참고하되, 내용이 부족하지 않도록 충분히 작성</div>
@@ -504,7 +512,7 @@
         <div class="content">
           <div class="deadline-row">
             <span class="deadline">📅 예비보고서 메일발송 9/16(수)</span>
-            <span class="deadline">📅 결과보고서 및 발표자료 메일발송 9/30(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 9/23(수)</span>
           </div>
           <table>
             <tr class="lead"><th>1번</th><td>고효은</td></tr>
@@ -520,8 +528,8 @@
         <summary>2️⃣ 실험 2 — Activation Energy</summary>
         <div class="content">
           <div class="deadline-row">
-            <span class="deadline">📅 예비보고서 메일발송 10/7(수)</span>
-            <span class="deadline">📅 결과보고서 및 발표자료 메일발송 10/14(수)</span>
+            <span class="deadline">📅 예비보고서 메일발송 9/30(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 10/21(수)</span>
           </div>
           <table>
             <tr class="lead"><th>1번</th><td>박재현</td></tr>
@@ -537,8 +545,8 @@
         <summary>3️⃣ 실험 3 — UV-Vis Absorption Spectroscopy</summary>
         <div class="content">
           <div class="deadline-row">
-            <span class="deadline">📅 예비보고서 메일발송 10/21(수)</span>
-            <span class="deadline">📅 결과보고서 및 발표자료 메일발송 10/28(수)</span>
+            <span class="deadline">📅 예비보고서 메일발송 11/4(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 11/11(수)</span>
           </div>
           <table>
             <tr class="lead"><th>1번</th><td>우수민</td></tr>
@@ -554,8 +562,8 @@
         <summary>4️⃣ 실험 4 — Gas Chromatography</summary>
         <div class="content">
           <div class="deadline-row">
-            <span class="deadline">📅 예비보고서 메일발송 11/4(수)</span>
-            <span class="deadline">📅 결과보고서 및 발표자료 메일발송 11/11(수)</span>
+            <span class="deadline">📅 예비보고서 메일발송 11/25(수)</span>
+            <span class="deadline">📅 결과보고서및발표자료 메일발송 12/2(수)</span>
           </div>
           <table>
             <tr class="lead"><th>1번</th><td>이용욱</td></tr>
@@ -625,26 +633,41 @@
   }
 
   /* ---------- 캘린더 ---------- */
-  // 실험 시행일(C)과 발표일(P)을 기준으로 계산합니다.
-  // [진한색, 1번 레인] 예비보고서 작성: C-7~C-2(화) → 화요일까지 취합담당에게 전달
-  //                    메일 발송(★ 진한색): C-1(수)
-  //                    결과보고서 작성: C~P-2(화) → 화요일까지 취합담당에게 전달
-  //                    메일 발송(★ 진한색): P-1(수)
-  // [연한색, 2번 레인] PPT 자료 정리: C~C+3(일) → 일요일까지 PPT담당에게 전달 (결과보고서 작성기간과 겹치는 구간에만 존재)
-  //                    조교님 제출(★ 연한색): P-2(화)
-  // 실험 당일(C)·발표 당일(P) 자체는 별도 표시하지 않습니다.
+  // 고정된 학사 일정에 맞춰 직접 지정합니다 (매주 목요일 기준, 9/10~12/10).
+  // 실험별 제출일은 실제 공지된 날짜를 그대로 사용합니다 (실험마다 간격이 다를 수 있음).
   const expGroups = [
-    { name:'Viscosity',         experiment:[2026,9,17],  present:[2026,10,1],  light:'#8fd9b6', dark:'#2f6f4f' },
-    { name:'Activation Energy', experiment:[2026,10,8],  present:[2026,10,15], light:'#a9c9f2', dark:'#3b6ea5' },
-    { name:'UV-Vis',            experiment:[2026,10,22], present:[2026,10,29], light:'#ddc0f5', dark:'#7b4fa0' },
-    { name:'GC',                experiment:[2026,11,5],  present:[2026,11,12], light:'#f8d5a0', dark:'#c97a2e' },
+    { idx:1, name:'Viscosity',         lab:[2026,9,17],  prelimDue:[2026,9,16],  resultDue:[2026,9,23],  light:'#8fd9b6', dark:'#2f6f4f' },
+    { idx:2, name:'Activation Energy', lab:[2026,10,8],  prelimDue:[2026,10,7],  resultDue:[2026,10,21], light:'#a9c9f2', dark:'#3b6ea5' },
+    { idx:3, name:'UV-Vis',            lab:[2026,11,5],  prelimDue:[2026,11,4],  resultDue:[2026,11,11], light:'#ddc0f5', dark:'#7b4fa0' },
+    { idx:4, name:'GC',                lab:[2026,11,26], prelimDue:[2026,11,25], resultDue:[2026,12,2],  light:'#f8d5a0', dark:'#c97a2e' },
+  ];
+
+  // 매주 목요일 학사 일정 태그 (OT / 이론 / 실험 / 휴강 / 결과발표 / 기말고사)
+  // 요청에 따라 동그라미는 색 구분 없이 옅은 회색으로 통일합니다.
+  const TAG_DOT_COLOR = '#c9c9c9';
+  const weeklySchedule = [
+    { date:[2026,9,3],   tag:'ot',      label:'OT' },
+    { date:[2026,9,10],  tag:'theory',  label:'[실험1] 이론' },
+    { date:[2026,9,17],  tag:'lab',     label:'[실험1] 실험' },
+    { date:[2026,9,24],  tag:'break',   label:'휴강' },
+    { date:[2026,10,1],  tag:'present', label:'[실험1] 결과 발표 및 [실험2] 이론' },
+    { date:[2026,10,8],  tag:'lab',     label:'[실험2] 실험' },
+    { date:[2026,10,15], tag:'break',   label:'휴강' },
+    { date:[2026,10,22], tag:'present', label:'[실험2] 결과 발표' },
+    { date:[2026,10,29], tag:'theory',  label:'[실험3] 이론' },
+    { date:[2026,11,5],  tag:'lab',     label:'[실험3] 실험' },
+    { date:[2026,11,12], tag:'present', label:'[실험3] 결과 발표' },
+    { date:[2026,11,19], tag:'theory',  label:'[실험4] 이론' },
+    { date:[2026,11,26], tag:'lab',     label:'[실험4] 실험' },
+    { date:[2026,12,3],  tag:'present', label:'[실험4] 결과 발표' },
+    { date:[2026,12,10], tag:'final',   label:'기말고사' },
   ];
 
   function mkDate(y,m,d){ return new Date(y, m-1, d); } // m: 1~12 입력받아 내부적으로 0-based 변환
   function addDays(date, n){ const d = new Date(date); d.setDate(d.getDate() + n); return d; }
 
   const minMonth = mkDate(2026,9,1);
-  const maxMonth = mkDate(2026,11,1);
+  const maxMonth = mkDate(2026,12,1);
 
   const realToday = new Date();
   realToday.setHours(0,0,0,0);
@@ -661,20 +684,21 @@
     const bars = [];
     const stars = [];
     expGroups.forEach(g => {
-      const C = mkDate(g.experiment[0], g.experiment[1], g.experiment[2]);
-      const P = mkDate(g.present[0], g.present[1], g.present[2]);
+      const tag = `[실험${g.idx}]`;
+      const lab = mkDate(g.lab[0], g.lab[1], g.lab[2]);
+      const prelimDue = mkDate(g.prelimDue[0], g.prelimDue[1], g.prelimDue[2]);
+      const resultDue = mkDate(g.resultDue[0], g.resultDue[1], g.resultDue[2]);
 
-      // 예비보고서: 조사자료 정리 → 화요일까지 취합담당 전달
-      bars.push({ lane:1, start:addDays(C,-7), end:addDays(C,-2), color:g.dark, label:`${g.name} 예비보고서 조사자료 정리 (~화 취합담당 전달)` });
-      stars.push({ date:addDays(C,-1), color:g.dark, label:'예비보고서 제출일' });
+      // 예비보고서 작성 (prelimDue 6일 전 ~ 전날) → prelimDue에 제출 메일 발송
+      bars.push({ lane:1, start:addDays(prelimDue,-6), end:addDays(prelimDue,-1), color:g.dark, label:`${tag} 예비보고서 작성` });
+      stars.push({ date:prelimDue, color:g.dark, label:`${tag} 예비보고서 제출일` });
 
-      // 결과보고서: 조사자료 정리 → 화요일까지 취합담당 전달
-      bars.push({ lane:1, start:C, end:addDays(P,-2), color:g.dark, label:`${g.name} 결과보고서 조사자료 정리 (~화 취합담당 전달)` });
-      // PPT: 결과보고서 작성기간과 겹치는 목~일 구간, 일요일까지 PPT담당 전달
-      bars.push({ lane:2, start:C, end:addDays(C,3), color:g.light, label:`${g.name} PPT 자료 정리 (~일 PPT담당 전달)` });
-      // PPT 조교님 제출(★, 연한색): 화요일
-      stars.push({ date:addDays(P,-2), color:g.light, label:'PPT 제출일' });
-      stars.push({ date:addDays(P,-1), color:g.dark, label:'결과보고서 제출일' });
+      // 결과보고서 작성 (실험일 ~ resultDue 전날) → resultDue에 결과보고서 및 발표자료 제출 메일 발송
+      bars.push({ lane:1, start:lab, end:addDays(resultDue,-1), color:g.dark, label:`${tag} 결과보고서 작성` });
+      stars.push({ date:resultDue, color:g.dark, label:`${tag} 결과보고서 및 발표자료 제출일` });
+
+      // PPT 자료 정리 (실험일 ~ +3일, 결과보고서 작성기간과 병행)
+      bars.push({ lane:2, start:lab, end:addDays(lab,3), color:g.light, label:`${tag} 발표자료(PPT) 정리` });
     });
     return { bars, stars };
   }
@@ -683,8 +707,12 @@
   function starAt(date){
     return allStars.find(s => sameDate(s.date, date)) || null;
   }
+  function tagAt(date){
+    const found = weeklySchedule.find(t => sameDate(mkDate(t.date[0],t.date[1],t.date[2]), date));
+    return found || null;
+  }
 
-  /* ---------- 별표 툴팁(간단 텍스트만) ---------- */
+  /* ---------- 툴팁(간단 텍스트만) ---------- */
   const tooltipEl = document.getElementById('calTooltip');
   function showTooltip(e, text){
     tooltipEl.textContent = text;
@@ -699,7 +727,7 @@
   function hideTooltip(){
     tooltipEl.classList.remove('show');
   }
-  function bindStarTooltip(el, text){
+  function bindTooltip(el, text){
     el.addEventListener('mouseenter', e => showTooltip(e, text));
     el.addEventListener('mousemove', moveTooltip);
     el.addEventListener('mouseleave', hideTooltip);
@@ -714,10 +742,15 @@
     note.innerHTML = '<b>─</b> 보고서 작성 &nbsp; <b>─</b> PPT 자료 정리 &nbsp; <b>★</b> 조교님께 메일 발송';
     legend.appendChild(note);
 
+    const tagNote = document.createElement('div');
+    tagNote.className = 'cal-legend-note';
+    tagNote.innerHTML = '<span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:'+TAG_DOT_COLOR+';margin-right:4px;"></span>학사 일정(OT, 이론, 실험, 휴강, 발표, 기말) — 커서를 올려 확인';
+    legend.appendChild(tagNote);
+
     expGroups.forEach(g => {
       const row = document.createElement('div');
       row.className = 'cal-legend-row';
-      row.innerHTML = `<span class="cal-swatch"><span style="background:${g.dark}"></span><span style="background:${g.light}"></span></span>${g.name}`;
+      row.innerHTML = `<span class="cal-swatch"><span style="background:${g.dark}"></span><span style="background:${g.light}"></span></span>[실험${g.idx}] ${g.name}`;
       legend.appendChild(row);
     });
   }
@@ -779,10 +812,19 @@
         if(star){
           starSlot.textContent = '★';
           starSlot.style.color = star.color;
-          bindStarTooltip(starSlot, star.label);
+          bindTooltip(starSlot, star.label);
         }
         cell.appendChild(starSlot);
         cell.appendChild(numEl);
+
+        const tag = tagAt(date);
+        if(tag){
+          const tagDot = document.createElement('span');
+          tagDot.className = 'cal-tag';
+          tagDot.style.background = TAG_DOT_COLOR;
+          bindTooltip(tagDot, tag.label);
+          cell.appendChild(tagDot);
+        }
       }
       weekEls[w].appendChild(cell);
     }
@@ -809,6 +851,7 @@
           bar.style.left = `calc(${(pos.col/7*100)}% + 3px)`;
           bar.style.width = `calc(${((endPos.col - pos.col + 1)/7*100)}% - 6px)`;
           bar.style.background = seg.color;
+          bindTooltip(bar, seg.label);
           weekEls[pos.row].appendChild(bar);
           d = addDays(endOfChunk, 1);
           continue;
@@ -817,6 +860,7 @@
       }
     });
   }
+
 
   function shiftMonth(delta){
     const next = new Date(current.getFullYear(), current.getMonth()+delta, 1);
